@@ -1,6 +1,7 @@
 #  🃏 Blackjack Website
 
 A clean and minimal browser-based Blackjack game built with HTML, CSS, and JavaScript.
+that can be copied easily 
 
 ## 🚀 Live Demo
 
@@ -8,18 +9,34 @@ A clean and minimal browser-based Blackjack game built with HTML, CSS, and JavaS
 
 ## 🎮 Features
 
-- Mobile-friendly layout.
-- Incorporates basic Blackjack functionality, such as:
-  - Hit
-  - Stand
-  - Dealer Logic
-  - Ace Handling
-  - Displaying different outcomes
-  - Handles busts and ties
-  - Blackjack detection
-- Clean and minimalistic website.
-- Includes real playing card images.
-- Option to play again.
+Responsive Design: Seamlessly adapts to mobile and desktop screens.
+
+Classic Blackjack Mechanics:
+
+Hit and Stand options
+
+Automated dealer logic
+
+Dynamic ace value (1 or 11)
+
+Outcome display (win, lose, tie)
+
+Bust and tie detection
+
+Blackjack recognition
+
+
+User Experience:
+
+Clean, minimalistic interface
+
+Realistic playing card visuals
+
+"Play Again" option for instant replay
+
+
+
+
 
 ## 💻 How to Run
 
