@@ -72,7 +72,7 @@ function startGame() {
         if (dealerSum === 21) {
             message = "Both got Blackjack. It's a tie!";
         } else {
-            message = "Blackjack! You win!";
+            message = "Blackjack! You won!";
         }
 
         document.getElementById("dealer-sum").innerText = dealerSum;
@@ -81,6 +81,7 @@ function startGame() {
 
         document.getElementById("hit").disabled = true;
         document.getElementById("stand").disabled = true;
+        document.getElementById("play-again").style.display = "block";
         return;
     }
 
@@ -117,9 +118,45 @@ function hit() {
     playerSum += getValue(card);
     playerAceCount += checkAce(card);
     document.getElementById("player-cards").append(cardImg);
-    document.getElementById("player-sum").innerText = ace(playerSum, playerAceCount);
 
-    if (ace(playerSum, playerAceCount) > 21) {
+    let adjustedPlayerSum = ace(playerSum, playerAceCount);
+    document.getElementById("player-sum").innerText = adjustedPlayerSum;
+
+    if (adjustedPlayerSum === 21) {
+        canHit = false;
+
+        // Dealer draws until at least 17
+        while (ace(dealerSum, dealerAceCount) < 17) {
+            let dealerCard = deck.pop();
+            let cardImg = document.createElement("img");
+            cardImg.src = `./cards/${dealerCard}.png`;
+            document.getElementById("dealer-cards").append(cardImg);
+
+            dealerSum += getValue(dealerCard);
+            dealerAceCount += checkAce(dealerCard);
+        }
+
+        dealerSum = ace(dealerSum, dealerAceCount);
+        document.getElementById("hidden").src = `./cards/${hidden}.png`;
+
+        let message = "";
+        if (dealerSum === 21) {
+            message = "Both got 21. It's a tie!";
+        } else if (dealerSum > 21) {
+            message = "You hit 21 and dealer busted. You win!";
+        } else if (dealerSum < 21) {
+            message = "You hit 21! You win!";
+        }
+
+        document.getElementById("dealer-sum").innerText = dealerSum;
+        document.getElementById("result").innerText = message;
+        document.getElementById("hit").disabled = true;
+        document.getElementById("stand").disabled = true;
+        document.getElementById("play-again").style.display = "block";
+        return;
+    }
+
+    if (adjustedPlayerSum > 21) {
         canHit = false;
         stand();
     }
@@ -134,15 +171,21 @@ function stand() {
 
     let message = "";
     if (playerSum > 21) {
-        message = "You Lost!";
+        message = "Bust! You lost.";
     } else if (dealerSum > 21) {
-        message = "You Won!";
-    } else if (playerSum == dealerSum) {
-        message = "Tie!";
+        message = "Dealer busts! You win!";
+    } else if (playerSum === 21 && dealerSum === 21) {
+        message = "Both have 21. It's a tie!";
+    } else if (playerSum === 21) {
+        message = "You hit 21! You win!";
+    } else if (dealerSum === 21) {
+        message = "Dealer has 21. You lost!";
     } else if (playerSum > dealerSum) {
-        message = "You Won!";
+        message = "You win with a higher hand!";
+    } else if (playerSum < dealerSum) {
+        message = "Dealer wins with a higher hand.";
     } else {
-        message = "You Lost!";
+        message = "Push. It's a tie!";
     }
 
     document.getElementById("dealer-sum").innerText = dealerSum;
