@@ -114,3 +114,46 @@ p {
     transform: translateY(-2px);
     box-shadow: 0 6px 10px rgba(0,0,0,0.15);
 }
+
+@media (max-width: 600px) {
+    .game-container {
+        width: 95%;
+        min-height: auto;
+        padding: 15px;
+    }
+
+    #dealer-cards img,
+    #player-cards img {
+        width: 60px;
+        height: auto;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;  
+        justify-content: center; 
+        align-items: center;  
+    }
+
+    #hit, #stand, #play-again {
+        width: 35%;        
+        max-width: 250px;     
+        font-size: 14px;       
+        height: 45px;           
+        border-radius: 8px;     
+    }
+
+    p {
+        font-size: 0.9rem;  
+    }
+
+    .game-container {
+        background: none;
+        backdrop-filter: none;
+        box-shadow: none;
+        width: 100%;
+        padding: 10px;
+        min-height: auto;
+    }
+}
