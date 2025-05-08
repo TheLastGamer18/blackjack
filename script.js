@@ -42,18 +42,16 @@ function startGame() {
     dealerSum += getValue(hidden);
     dealerAceCount += checkAce(hidden);
 
-    while (dealerSum < 17) {
-        let cardImg = document.createElement("img");
-        let card = deck.pop();
-        cardImg.src = `./cards/${card}.png`;
-        dealerSum += getValue(card);
-        dealerAceCount += checkAce(card);
-        document.getElementById("dealer-cards").append(cardImg);
-    }
+    let card = deck.pop();
+    let cardImg = document.createElement("img");
+    cardImg.src = `./cards/${card}.png`;
+    dealerSum += getValue(card);
+    dealerAceCount += checkAce(card);
+    document.getElementById("dealer-cards").append(cardImg);
 
     for (let i = 0; i < 2; i++) {
-        let cardImg = document.createElement("img");
         let card = deck.pop();
+        let cardImg = document.createElement("img");
         cardImg.src = `./cards/${card}.png`;
         playerSum += getValue(card);
         playerAceCount += checkAce(card);
@@ -68,17 +66,12 @@ function startGame() {
         document.getElementById("hidden").src = `./cards/${hidden}.png`;
         dealerSum = ace(dealerSum, dealerAceCount);
 
-        let message = "";
-        if (dealerSum === 21) {
-            message = "Both got Blackjack. It's a tie!";
-        } else {
-            message = "Blackjack! You won!";
-        }
+        let message = dealerSum === 21
+            ? "Both got Blackjack. It's a tie!"
+            : "Blackjack! You won!";
 
         document.getElementById("dealer-sum").innerText = dealerSum;
-        document.getElementById("player-sum").innerText = adjustedPlayerSum;
         document.getElementById("result").innerText = message;
-
         document.getElementById("hit").disabled = true;
         document.getElementById("stand").disabled = true;
         document.getElementById("play-again").style.display = "block";
@@ -88,6 +81,7 @@ function startGame() {
     document.getElementById("hit").addEventListener("click", hit);
     document.getElementById("stand").addEventListener("click", stand);
 }
+
 
 function getValue(card) {
     let data = card.split("-");
@@ -163,29 +157,32 @@ function hit() {
 }
 
 function stand() {
-    dealerSum = ace(dealerSum, dealerAceCount);
-    playerSum = ace(playerSum, playerAceCount);
-
     canHit = false;
     document.getElementById("hidden").src = `./cards/${hidden}.png`;
+
+    while (ace(dealerSum, dealerAceCount) < 17) {
+        let card = deck.pop();
+        let cardImg = document.createElement("img");
+        cardImg.src = `./cards/${card}.png`;
+        dealerSum += getValue(card);
+        dealerAceCount += checkAce(card);
+        document.getElementById("dealer-cards").append(cardImg);
+    }
+
+    dealerSum = ace(dealerSum, dealerAceCount);
+    playerSum = ace(playerSum, playerAceCount);
 
     let message = "";
     if (playerSum > 21) {
         message = "Bust! You lost.";
     } else if (dealerSum > 21) {
         message = "Dealer busts! You win!";
-    } else if (playerSum === 21 && dealerSum === 21) {
-        message = "Both have 21. It's a tie!";
-    } else if (playerSum === 21) {
-        message = "You hit 21! You win!";
-    } else if (dealerSum === 21) {
-        message = "Dealer has 21. You lost!";
+    } else if (playerSum === dealerSum) {
+        message = "Push. It's a tie!";
     } else if (playerSum > dealerSum) {
         message = "You win with a higher hand!";
-    } else if (playerSum < dealerSum) {
-        message = "Dealer wins with a higher hand.";
     } else {
-        message = "Push. It's a tie!";
+        message = "Dealer wins with a higher hand.";
     }
 
     document.getElementById("dealer-sum").innerText = dealerSum;
@@ -197,6 +194,7 @@ function stand() {
     document.getElementById("play-again").style.display = "block";
 }
 
+
 function ace(sum, aceCount) {
     while (sum > 21 && aceCount > 0) {
         sum -= 10;
@@ -204,3 +202,20 @@ function ace(sum, aceCount) {
     }
     return sum;
 }
+
+// Help modal logic
+document.getElementById("help-button").addEventListener("click", () => {
+    document.getElementById("help-modal").style.display = "block";
+});
+
+document.querySelector(".close-button").addEventListener("click", () => {
+    document.getElementById("help-modal").style.display = "none";
+});
+
+// Optional: close modal when clicking outside of it
+window.addEventListener("click", (event) => {
+    const modal = document.getElementById("help-modal");
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+});
