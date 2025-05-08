@@ -1,34 +1,54 @@
 <!DOCTYPE html>
+
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Black Jack</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="game-container">
-        <div class="dealer-container">
-            <h2>Dealer: <span id="dealer-sum"></span></h2>
-            <div id="dealer-cards">
-                <img src="./cards/BACK.png" id="hidden">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Black Jack</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <div class="game-container">
+            <div class="dealer-container">
+                <h2>Dealer: <span id="dealer-sum"></span></h2>
+                <div id="dealer-cards">
+                    <img src="./cards/BACK.png" id="hidden">
+                </div>
+            </div>
+
+            <div class="player-container">
+                <h2>You: <span id="player-sum"></span></h2>
+                <div id="player-cards"></div>
+            </div>
+
+            <div class="buttons">
+                <button id="hit">Hit</button>
+                <button id="stand">Stand</button>
+            </div>
+
+            <p id="result"></p>
+            <button id="play-again" style="display: none;">Play Again</button>
+        </div>
+
+        <button id="help-button">❓</button>
+
+        <div id="help-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2>How to Play Blackjack:</h2>
+                <p>
+                The goal is to get as close to 21 as possible without going over.<br><br>
+                - Aces are worth 1 or 11 (whichever proves beneficial), face cards are worth 10.<br>
+                - You and the dealer each get 2 cards. One of the dealer's cards is hidden.<br>
+                - Press "Hit" to draw another card.<br>
+                - Press "Stand" to end your turn.<br>
+                - The dealer must draw until they have 17 or more.<br>
+                - If your total is higher than the dealer’s (without going over 21), you win!
+                </p>
             </div>
         </div>
 
-        <div class="player-container">
-            <h2>You: <span id="player-sum"></span></h2>
-            <div id="player-cards"></div>
-        </div>
-
-        <div class="buttons">
-            <button id="hit">Hit</button>
-            <button id="stand">Stand</button>
-        </div>
-
-        <p id="result"></p>
-        <button id="play-again" style="display: none;">Play Again</button>
-    </div>
-
-    <script src="script.js"></script>
-</body>
+        <script src="script.js"></script>
+    </body>
 </html>
