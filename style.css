@@ -51,7 +51,8 @@ body {
     margin-top: 30px;
 }
 
-#hit, #stand {
+#hit,
+#stand {
     width: 100px;
     height: 40px;
     border: none;
@@ -60,7 +61,7 @@ body {
     font-weight: bold;
     color: white;
     cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease;
 }
 
@@ -72,17 +73,20 @@ body {
     background: linear-gradient(135deg, #dc3545, #c82333);
 }
 
-#hit:hover, #stand:hover {
+#hit:hover,
+#stand:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
-#hit:active, #stand:active {
+#hit:active,
+#stand:active {
     transform: translateY(1px);
-    box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 
-#hit:disabled, #stand:disabled {
+#hit:disabled,
+#stand:disabled {
     background: #ccc;
     color: #666;
     cursor: not-allowed;
@@ -112,7 +116,7 @@ p {
 
 #play-again:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
 @media (max-width: 600px) {
@@ -131,21 +135,23 @@ p {
     .buttons {
         flex-direction: column;
         gap: 15px;
-        width: 100%;  
-        justify-content: center; 
-        align-items: center;  
+        width: 100%;
+        justify-content: center;
+        align-items: center;
     }
 
-    #hit, #stand, #play-again {
-        width: 35%;        
-        max-width: 250px;     
-        font-size: 14px;       
-        height: 45px;           
-        border-radius: 8px;     
+    #hit,
+    #stand,
+    #play-again {
+        width: 35%;
+        max-width: 250px;
+        font-size: 14px;
+        height: 45px;
+        border-radius: 8px;
     }
 
     p {
-        font-size: 0.9rem;  
+        font-size: 0.9rem;
     }
 
     .game-container {
@@ -155,5 +161,121 @@ p {
         width: 100%;
         padding: 10px;
         min-height: auto;
+    }
+}
+
+#help-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 36px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+#help-button:hover {
+    background: linear-gradient(135deg, #5cb85c, #4cae4c);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+#help-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(3px);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 30px;
+    border-radius: 8px;
+    width: 60%;
+    max-width: 500px;
+    text-align: left;
+    color: #333;
+    font-size: 1rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    z-index: 1002;
+}
+
+.modal-content h2,
+.modal-content p {
+    color: #333;
+}
+
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: #000;
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        width: 80%;
+        padding: 20px;
+    }
+
+    .modal-content h2 {
+        font-size: 1.2rem;
+    }
+
+    .modal-content p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .modal-content h2 {
+        font-size: 1rem;
+    }
+
+    .modal-content p {
+        font-size: 0.85rem;
+    }
+
+    .close-button {
+        font-size: 24px;
     }
 }
